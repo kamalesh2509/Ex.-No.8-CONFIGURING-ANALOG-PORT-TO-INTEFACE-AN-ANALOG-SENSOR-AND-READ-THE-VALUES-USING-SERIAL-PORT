@@ -1,10 +1,11 @@
-**** 
+```
+NAME: E kamalesh
+REG NO: 212222100019
+```
 
 
 ### Ex. No. :8 CONFIGURING ANALOG PORT TO INTEFACE AN ANALOG SENSOR AND READ THE VALUES USING SERIAL PORT
-## Date: 
-###  
-
+## Date: 30/04/2024
 ## Aim: 
 To configure ADC channel for interfacing an analog sensor and read the values on the com port 
 ## Components required:
@@ -150,17 +151,48 @@ This module also includes a potentiometer that will fix the threshold value, & t
 
 
 ##  Program 
+```py
+
+#include "main.h"
+#include"stdio.h"
+uint32_t adcvalue;
+#if defined (_ICCARM_) || defined (__ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(_GNUC_)
+   
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif  
 
 
- 
+PUTCHAR_PROTOTYPE
+{
 
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+
+while(1)
+{
+
+	HAL_ADC_Start(&hadc1);
+			HAL_ADC_PollForConversion(&hadc1,100);
+			adcvalue = HAL_ADC_GetValue(&hadc1);
+			HAL_ADC_Stop(&hadc1);
+			HAL_Delay(500);
+			printf("ADC VALUE:%ld\n",adcvalue);
+
+}
+```
 ## Result :
- 
+![pmcexp8 1](https://github.com/Rajeshanbu/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118924713/63864bbe-3507-4476-877f-a2bc6ce0c7a5)
+
+![exppmc8 2](https://github.com/Rajeshanbu/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118924713/42ed3e8c-71db-4931-9001-36773cadc9f3)
+
+![exppmc8 3](https://github.com/Rajeshanbu/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118924713/f5e78dba-9ff8-4b8c-9c81-b5e07569c130)
+
+
+
 ## Output  :
-
-
-
-
-
-
-****
+Configured an analog port for stm 32 controller and read the values on the serial port successfully.
+](https://github.com/kamalesh2509/EXPERIMENT--04-INTERFACING-AN16X2-LCD-DISPLAY-WITH-ARM-.git)
